@@ -1,0 +1,9 @@
+# block directory browsing
+Options All -Indexes
+ErrorDocument 403 http://localhost/krstevski/index.php
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILE} !-d
+
+RewriteRule ^([^\.]+)$ $1.html [NC,L]

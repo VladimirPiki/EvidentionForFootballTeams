@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krstevski</title>
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+
+    <!--JQuery-->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/results.js"></script>
+
+
+    <!--CSS-->
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--Icons link-->
+    <link rel="stylesheet" href="../assets/icons/fontawesome-free-6.1.2-web/css/all.css">
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid ">
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a id="teams" class="nav-link active" href="#">Teams</a>
+                </li>
+                <li class="nav-item">
+                    <a id="leagues" class="nav-link active" href="#">Leagues</a>
+                </li>
+                <li class="nav-item">
+                    <a id="moja" class="nav-link active" href="#">Moja</a>
+                </li>
+                <li class="nav-item">
+                    <a id="sport" class="nav-link active" href="#">Sport</a>
+                </li>
+                <li class="nav-item">
+                    <a id="premierLeague" class="nav-link active" href="#">Premier League</a>
+                </li>
+                <li class="nav-item">
+                    <a id="results" class="nav-link active" href="#">Results</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <!-- The Modal Logout -->
+    <button id="logOutBtn" type="button" class="btn btn-warning" data-bs-toggle="modal"
+        data-bs-target="#logOutBootstrap">
+        <h4>Одлогирај се</h4>
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="logOutBootstrap" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h1 class="modal-title fs-5 " id="exampleModalLabel">Дали сакате навистина сакате да се одлогирате
+                        ???
+                    </h1>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary mb-5" id="logOut">Да</button>
+                    <button type="button" class="btn btn-primary mb-5" data-bs-dismiss="modal"
+                        aria-label="Close">Назад</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Button trigger insert modal -->
+    <button id="addButton" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <h4>Додади резултат</h4> <a id="insertPodatoci"></a>
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="post" id="formResults">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h1 class="modal-title fs-5 " id="exampleModalLabel">Додади резултати</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <label for="">Име на лига</label>
+                        <select class="form-control" id="leagueSelect" name="leagueSelect"
+                            aria-describedby="zadolzitelnoLiga"></select>
+                        <div id="zadolzitelnoLiga" class="form-text">*Задолжително изберете!!!</div>
+                        <p id="dangerLiga" class="alert alert-danger" role="alert">Задолжително изберете за лига!!!</p>
+
+                        <br>
+
+                        <label for="">Домаќин</label>
+                        <select class="form-control" id="domakinSelect" name="domakinSelect"
+                            aria-describedby="zadolzitelnoLiga"></select>
+                        <div id="zadolzitelnoDomakin" class="form-text">*Задолжително изберете!!!</div>
+                        <p id="dangerDomakin" class="alert alert-danger" role="alert">Задолжително
+                            изберете за домашен тим!!! </p>
+                        <p id="istiTimoviDomakin" class="alert alert-warning" role="alert">Имате избрано исти тим. Ве
+                            молам пополнете правилно!!! </p>
+
+                        <br>
+
+                        <label for="">Гостин</label>
+                        <select class="form-control" id="gostinSelect" name="gostinSelect"
+                            aria-describedby="zadolzitelnoGostin"></select>
+                        <div id="zadolzitelnoGostin" class="form-text">*Задолжително изберете !!!</div>
+                        <p id="dangerGostin" class="alert alert-danger" role="alert">Задолжително изберете гостински
+                            тим!!!</p>
+                        <p id="istiTimoviGostin" class="alert alert-warning" role="alert">Имате избрано исти тим. Ве
+                            молам пополнете правилно!!! </p>
+
+                        <br>
+
+                        <label for="">Датум</label>
+                        <input type="date" name="addDatum" id="addDatum" class="form-control"
+                            placeholder="Внесете датум" aria-describedby="zadolzitelnoDatum">
+                        <div id="zadolzitelnoDatum" class="form-text">*Задолжително внесете !!!</div>
+                        <p id="dangerDatum" class="alert alert-danger" role="alert">Задолжително внесете датум!!! </p>
+
+                        <br>
+
+                        <label for="">Време</label>
+                        <input type="time" name="addVreme" id="addVreme" class="form-control"
+                            placeholder="Внесете време" aria-describedby="zadolzitelnoVreme">
+                        <div id="zadolzitelnoVreme" class="form-text">*Задолжително внесете !!!</div>
+                        <p id="dangerVreme" class="alert alert-danger" role="alert">Задолжително внесете време!!! </p>
+
+                        <br>
+
+                        <label for="">Натпреварување</label>
+                        <select class="form-control" id="natprevaruvanjeSport" name="natprevaruvanjeSport"
+                            aria-describedby="zadolzitelnoSport"></select>
+                        <div id="zadolzitelnoSport" class="form-text">*Задолжително изберете!!!</div>
+                        <p id="dangerSport" class="alert alert-danger" role="alert">Задолжително изберете
+                            натпреварување!!! </p>
+
+                        <!--------------------------------------REZULTAT------------------------------------------------------------------->
+                        <br>
+                        <p id="pokaziNaslovZaRezultat" class="mb-2 text-center">Изберете спорт за да внесите конечен
+                            резултат за натпреварот
+                        </p>
+                        <div id="">
+                            <div class="row" id="pokaziKonecen">
+
+                                <label for="" class="mb-2 text-center">Kонечен резултат за натпреварот</label>
+
+                                <div id="" class="col-5">
+                                    <label for="">Домаќин</label>
+                                    <input type="number" name="addKonecenHome" id="addKonecenHome" class="form-control"
+                                        placeholder="Внесете го резултатот на домаќинот"
+                                        aria-describedby="zadolzitelnoKonecenDomakin">
+                                    <div id="zadolzitelnoKonecenDomakin" class="form-text">*Задолжително внесете!!!
+                                        Можете
+                                        да
+                                        внесите максимално три
+                                        броеви!!!</div>
+                                    <p id="dangerKonecenDomakin" class="alert alert-danger" role="alert">Задолжително
+                                        внесете резултат за домаќинот !!! </p>
+                                    <p id="maxKonecenHome" class="alert alert-danger " role="alert">Ве молам внесете
+                                        максимум три броеви !!! </p>
+                                </div>
+
+                                <div class="col-2 text-center">
+                                    <h1 class="mt-3">:</h1>
+                                </div>
+
+                                <div class="col-5">
+                                    <label for="">Гостин</label>
+                                    <input type="number" name="addKonecenAway" id="addKonecenAway" class="form-control"
+                                        placeholder="Внесете го резултатот на гостинот"
+                                        aria-describedby="zadolzitelnoKonecenGostin">
+                                    <div id="zadolzitelnoKonecenGostin" class="form-text">*Задолжително внесете !!!
+                                        Можете
+                                        да
+                                        внесите максимално три
+                                        броеви!!!</div>
+                                    <p id="dangerKonecenGostin" class="alert alert-danger" role="alert">Задолжително
+                                        внесете
+                                        резултат за гостин!!! </p>
+                                    <p id="maxKonecenAway" class="alert alert-danger " role="alert">Ве молам внесете
+                                        максимум три броеви !!! </p>
+                                </div>
+
+                            </div>
+
+                            <br>
+                            <div id="pokaziPrvoVtoroPoluvreme">
+                                <div class="row">
+                                    <label for="" class="mb-2 text-center">Резултат прво полувреме</label>
+                                    <div id="" class="col-5">
+                                        <label for="">Домаќин</label>
+                                        <input type="number" name="addPrvoPoluvremeHome" id="addPrvoPoluvremeHome"
+                                            class="form-control" placeholder="Прво полувреме домаќин">
+                                        <div id="zadolzitelnoPrvoPoluvremeHome" class="form-text">Можете да внесите
+                                            максимално
+                                            три
+                                            броеви!!!</div>
+                                        <p id="maxPrvoHome" class="alert alert-danger " role="alert">Ве молам внесете
+                                            максимум три броеви !!! </p>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <h1 class="mt-3">:</h1>
+                                    </div>
+                                    <div class="col-5">
+                                        <label for="">Гостин</label>
+                                        <input type="number" name="addPrvoPoluvremeAway" id="addPrvoPoluvremeAway"
+                                            class="form-control" placeholder="Прво полувреме гостин">
+                                        <div id="zadolzitelnoPrvoPoluvremeAway" class="form-text"> Можете да внесите
+                                            максимално
+                                            три
+                                            броеви!!!</div>
+                                        <p id="maxPrvoAway" class="alert alert-danger " role="alert">Ве молам внесете
+                                            максимум три броеви !!! </p>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <div class="row">
+                                    <label for="" class="mb-2 text-center">Резултат второ полувреме</label>
+                                    <div id="" class="col-5">
+                                        <label for="">Домаќин</label>
+                                        <input type="number" name="addVtoroPoluvremeHome" id="addVtoroPoluvremeHome"
+                                            class="form-control" placeholder="Второ полувреме домаќин">
+                                        <div id="zadolzitelnoVtoroPoluvremeHome" class="form-text"> Можете да внесите
+                                            максимално
+                                            три
+                                            броеви!!!</div>
+                                        <p id="maxVtoroHome" class="alert alert-danger " role="alert">Ве молам внесете
+                                            максимум три броеви !!! </p>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <h1 class="mt-3">:</h1>
+                                    </div>
+                                    <div class="col-5">
+                                        <label for="">Гостин</label>
+                                        <input type="number" name="addVtoroPoluvremeAway" id="addVtoroPoluvremeAway"
+                                            class="form-control" placeholder="Второ полувреме гостин">
+                                        <div id="zadolzitelnoVtoroPoluvremeAway" class="form-text"> Можете да внесите
+                                            максимално
+                                            три
+                                            броеви!!!</div>
+                                        <p id="maxVtoroAway" class="alert alert-danger " role="alert">Ве молам внесете
+                                            максимум три броеви !!! </p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <br>
+
+                            <div class="row" id="pokaziTretoPoluvreme">
+                                <label for="" class="mb-2 text-center">Резултат трето полувреме</label>
+                                <div id="" class="col-5">
+                                    <label for="">Домаќин</label>
+                                    <input type="number" name="addTretoPoluvremeHome" id="addTretoPoluvremeHome"
+                                        class="form-control" placeholder="Трето полувреме домаќин">
+                                    <div id="zadolzitelnoTretoPoluvremeHome" class="form-text"> Можете да внесите
+                                        максимално
+                                        три
+                                        броеви!!!</div>
+                                    <p id="maxTretoHome" class="alert alert-danger " role="alert">Ве молам внесете
+                                        максимум три броеви !!! </p>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <h1 class="mt-3">:</h1>
+                                </div>
+                                <div class="col-5">
+                                    <label for="">Гостин</label>
+                                    <input type="number" name="addTretoPoluvremeAway" id="addTretoPoluvremeAway"
+                                        class="form-control" placeholder="Трето полувреме гостин">
+                                    <div id="zadolzitelnoTretoPoluvremeAway" class="form-text">Можете да внесите
+                                        максимално
+                                        три
+                                        броеви!!!</div>
+                                    <p id="maxTretoAway" class=" alert alert-danger " role=" alert">Ве молам внесете
+                                        максимум три броеви !!! </p>
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="row" id="pokaziCetvrtoPoluvreme">
+                                <label for="" class="mb-2 text-center">Резултат четврто полувреме</label>
+                                <div id="" class="col-5">
+                                    <label for="">Домаќин</label>
+                                    <input type="number" name="addCetvrtoPoluvremeHome" id="addCetvrtoPoluvremeHome"
+                                        class="form-control" placeholder="Четврто полувреме домаќин">
+                                    <div id="zadolzitelnoCetvrtoPoluvremeHome" class="form-text">Можете да внесите
+                                        максимално три
+                                        броеви!!!</div>
+                                    <p id="maxCetvrtoHome" class="alert alert-danger " role="alert">Ве молам внесете
+                                        максимум три броеви !!! </p>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <h1 class="mt-3">:</h1>
+                                </div>
+                                <div class="col-5">
+                                    <label for="">Гостин</label>
+                                    <input type="number" name="addCetvrtoPoluvremeAway" id="addCetvrtoPoluvremeAway"
+                                        class="form-control" placeholder="Четврто полувреме гостин">
+                                    <div id="zadolzitelnoCetvrtoPoluvremeAway" class="form-text">Можете да внесите
+                                        максимално три
+                                        броеви!!!</div>
+                                    <p id="maxCetvrtoAway" class="alert alert-danger " role="alert">Ве молам внесете
+                                        максимум три броеви !!! </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!----------------DO TUKA E REZULTAT---------------------------------------------------------------->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary mb-5" id="submit">Зачувај</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-----------------------------------------SEARCH----------------------------------------------->
+    <br><br>
+    <input id="myInput" class="form-control" type="text" placeholder="Пребарајте тука..">
+
+    <!-----------------------------------------TABLE----------------------------------------------->
+    <br><br>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped text-center" id="myTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                Ид
+                            </th>
+                            <th>
+                                Име на лига
+                            </th>
+                            <th>
+                                Домаќин
+                            </th>
+                            <th>
+                                Резултат
+                            </th>
+                            <th>
+                                Гостин
+                            </th>
+                            <th>
+                                Датум
+                            </th>
+                            <th>
+                                Време
+                            </th>
+                            <th>
+                                Натпреварување
+                            </th>
+                            <th>
+                                Избриши
+                            </th>
+                            <th>
+                                Промени
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------------DELETE------------------------------------------------------------------------------------>
+    <!-- The Modal Delete -->
+    <div class="modal" id="deleteModal-">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Избриши изигран натпревар на ден: <a id="deleteDatum"></a> во <a
+                            id="deleteVreme"></a>
+                    </h5>
+                    <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Дали сакате да ја избришите утакмицата помеѓу <a id="deletePrashalnik"></a>?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="deleteResults-"
+                        data-bs-dismiss="modal">ИЗБРИШИ</button>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">ЗАТВОРИ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--------------------------------UPDATE------------------------------------------------------------------------------------>
+    <!-- The Modal Update -->
+    <div class="modal" id="editModal-">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Дали сакате да го промените <a id="naslovIme"></a> ???
+                    </h5>
+                    <button type="button" class="btn-close " data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form name="myForm">
+                        <div class="row">
+
+                            <div class="col-sm-12 bg-light">
+                                <div class="mb-3">
+                                    <label for="leagueSelectUpdate" class="form-label">Име на лига</label>
+                                    <select class="form-control" id="leagueSelectUpdate"
+                                        name="leagueSelectUpdate"></select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="domakinSelectUpdate" class="form-label">Домаќин</label>
+                                    <select class="form-control" id="domakinSelectUpdate"
+                                        name="domakinSelectUpdate"></select>
+                                    <p class="alert alert-warning istiTimoviUpdate" role="alert">Имате
+                                        избрано исти тим. Ве
+                                        молам пополнете правилно!!! </p>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="gostinSelectUpdate" class="form-label">Гостин</label>
+                                    <select class="form-control" id="gostinSelectUpdate"
+                                        name="gostinSelectUpdate"></select>
+                                    <p class="alert alert-warning istiTimoviUpdate" role="alert">Имате
+                                        избрано исти тим. Ве
+                                        молам пополнете правилно!!! </p>
+                                </div>
+
+                                <!-- hidden -->
+                                <div class="mb-3" hidden>
+                                    <label for="domakinSelectUpdateHide" class="form-label">Домаќин</label>
+                                    <select class="form-control" id="domakinSelectUpdateHide"
+                                        name="domakinSelectUpdateHide"></select>
+                                </div>
+
+                                <div class="mb-3" hidden>
+                                    <label for="gostinSelectUpdateHide" class="form-label">Гостин</label>
+                                    <select class="form-control" id="gostinSelectUpdateHide"
+                                        name="gostinSelectUpdateHide"></select>
+                                </div>
+                                <!-- dotuka hidden-->
+
+                                <div class="mb-3">
+                                    <label for="datumUpdate" class="form-label">Датум</label>
+                                    <div id="datumDivUpdate"> </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="vremeUpdate" class="form-label">Време</label>
+                                    <div id="vremeDivUpdate"> </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="">Натпреварување</label>
+                                    <select class="form-control" id="natprevaruvanjeSportUpdate"
+                                        name="natprevaruvanjeSportUpdate">
+                                    </select>
+                                </div>
+
+                                <!---------------------------REZULTAT--------------------------------------->
+
+                                <div>
+                                    <div id="">
+                                        <div class="row" id="pokaziKonecenUpdate">
+
+                                            <label for="" class="mb-2 text-center">Kонечен резултат за
+                                                натпреварот</label>
+
+                                            <div id="" class="col-5">
+                                                <label for="">Домаќин</label>
+                                                <input type="number" name="konecenHomeUpdate" id="konecenHomeUpdate"
+                                                    class="form-control"
+                                                    aria-describedby="zadolzitelnoKonecenDomakinUpdate">
+                                                <div id="zadolzitelnoKonecenDomakinUpdate" class="form-text">
+                                                    *Задолжително
+                                                    внесете!!!
+                                                    Можете
+                                                    да
+                                                    внесите максимално три
+                                                    броеви!!!</div>
+                                                <p id="dangerKonecenDomakinUpdate" class="alert alert-danger"
+                                                    role="alert">
+                                                    Задолжително
+                                                    внесете резултат за домаќинот !!! </p>
+                                                <p id="maxKonecenHomeUpdate" class="alert alert-danger " role="alert">Ве
+                                                    молам
+                                                    внесете
+                                                    максимум три броеви !!! </p>
+                                            </div>
+
+                                            <div class="col-2 text-center">
+                                                <h1 class="mt-3">:</h1>
+                                            </div>
+
+                                            <div class="col-5">
+                                                <label for="">Гостин</label>
+                                                <input type="number" name="KonecenAwayUpdate" id="KonecenAwayUpdate"
+                                                    class="form-control" placeholder="Внесете го резултатот на гостинот"
+                                                    aria-describedby="zadolzitelnoKonecenGostinUpdate">
+                                                <div id="zadolzitelnoKonecenGostinUpdate" class="form-text">
+                                                    *Задолжително
+                                                    внесете !!!
+                                                    Можете
+                                                    да
+                                                    внесите максимално три
+                                                    броеви!!!</div>
+                                                <p id="dangerKonecenGostinUpdate" class="alert alert-danger"
+                                                    role="alert">
+                                                    Задолжително
+                                                    внесете
+                                                    резултат за гостин!!! </p>
+                                                <p id="maxKonecenAwayUpdate" class="alert alert-danger " role="alert">Ве
+                                                    молам
+                                                    внесете
+                                                    максимум три броеви !!! </p>
+                                            </div>
+
+                                        </div>
+
+                                        <br>
+                                        <div id="pokaziPrvoVtoroPoluvremeUpdate">
+                                            <div class="row">
+                                                <label for="" class="mb-2 text-center">Резултат прво полувреме</label>
+                                                <div id="" class="col-5">
+                                                    <label for="">Домаќин</label>
+                                                    <input type="number" name="PrvoPoluvremeHomeUpdate"
+                                                        id="PrvoPoluvremeHomeUpdate" class="form-control"
+                                                        placeholder="Прво полувреме домаќин">
+                                                    <div id="zadolzitelnoPrvoPoluvremeHomeUpdate" class="form-text">
+                                                        Можете да
+                                                        внесите
+                                                        максимално
+                                                        три
+                                                        броеви!!!</div>
+                                                    <p id="maxPrvoHomeUpdate" class="alert alert-danger " role="alert">
+                                                        Ве
+                                                        молам внесете
+                                                        максимум три броеви !!! </p>
+                                                </div>
+                                                <div class="col-2 text-center">
+                                                    <h1 class="mt-3">:</h1>
+                                                </div>
+                                                <div class="col-5">
+                                                    <label for="">Гостин</label>
+                                                    <input type="number" name="PrvoPoluvremeAwayUpdate"
+                                                        id="PrvoPoluvremeAwayUpdate" class="form-control"
+                                                        placeholder="Прво полувреме гостин">
+                                                    <div id="zadolzitelnoPrvoPoluvremeAwayUpdate" class="form-text">
+                                                        Можете да
+                                                        внесите
+                                                        максимално
+                                                        три
+                                                        броеви!!!</div>
+                                                    <p id="maxPrvoAwayUpdate" class="alert alert-danger " role="alert">
+                                                        Ве
+                                                        молам внесете
+                                                        максимум три броеви !!! </p>
+                                                </div>
+                                            </div>
+
+                                            <br>
+
+                                            <div class="row">
+                                                <label for="" class="mb-2 text-center">Резултат второ полувреме</label>
+                                                <div id="" class="col-5">
+                                                    <label for="">Домаќин</label>
+                                                    <input type="number" name="VtoroPoluvremeHomeUpdate"
+                                                        id="VtoroPoluvremeHomeUpdate" class="form-control"
+                                                        placeholder="Второ полувреме домаќин">
+                                                    <div id="zadolzitelnoVtoroPoluvremeHomeUpdate" class="form-text">
+                                                        Можете
+                                                        да внесите
+                                                        максимално
+                                                        три
+                                                        броеви!!!</div>
+                                                    <p id="maxVtoroHomeUpdate" class="alert alert-danger " role="alert">
+                                                        Ве
+                                                        молам внесете
+                                                        максимум три броеви !!! </p>
+                                                </div>
+                                                <div class="col-2 text-center">
+                                                    <h1 class="mt-3">:</h1>
+                                                </div>
+                                                <div class="col-5">
+                                                    <label for="">Гостин</label>
+                                                    <input type="number" name="VtoroPoluvremeAwayUpdate"
+                                                        id="VtoroPoluvremeAwayUpdate" class="form-control"
+                                                        placeholder="Второ полувреме гостин">
+                                                    <div id="zadolzitelnoVtoroPoluvremeAwayUpdate" class="form-text">
+                                                        Можете
+                                                        да внесите
+                                                        максимално
+                                                        три
+                                                        броеви!!!</div>
+                                                    <p id="maxVtoroAwayUpdate" class="alert alert-danger " role="alert">
+                                                        Ве
+                                                        молам внесете
+                                                        максимум три броеви !!! </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <br>
+
+                                        <div class="row" id="pokaziTretoPoluvremeUpdate">
+                                            <label for="" class="mb-2 text-center">Резултат трето полувреме</label>
+                                            <div id="" class="col-5">
+                                                <label for="">Домаќин</label>
+                                                <input type="number" name="TretoPoluvremeHomeUpdate"
+                                                    id="TretoPoluvremeHomeUpdate" class="form-control"
+                                                    placeholder="Трето полувреме домаќин">
+                                                <div id="zadolzitelnoTretoPoluvremeHomeUpdate" class="form-text"> Можете
+                                                    да
+                                                    внесите
+                                                    максимално
+                                                    три
+                                                    броеви!!!</div>
+                                                <p id="maxTretoHomeUpdate" class="alert alert-danger " role="alert">Ве
+                                                    молам
+                                                    внесете
+                                                    максимум три броеви !!! </p>
+                                            </div>
+                                            <div class="col-2 text-center">
+                                                <h1 class="mt-3">:</h1>
+                                            </div>
+                                            <div class="col-5">
+                                                <label for="">Гостин</label>
+                                                <input type="number" name="TretoPoluvremeAwayUpdate"
+                                                    id="TretoPoluvremeAwayUpdate" class="form-control"
+                                                    placeholder="Трето полувреме гостин">
+                                                <div id="zadolzitelnoTretoPoluvremeAwayUpdate" class="form-text">Можете
+                                                    да
+                                                    внесите
+                                                    максимално
+                                                    три
+                                                    броеви!!!</div>
+                                                <p id="maxTretoAwayUpdate" class=" alert alert-danger " role=" alert">Ве
+                                                    молам
+                                                    внесете
+                                                    максимум три броеви !!! </p>
+                                            </div>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row" id="pokaziCetvrtoPoluvremeUpdate">
+                                            <label for="" class="mb-2 text-center">Резултат четврто полувреме</label>
+                                            <div id="" class="col-5">
+                                                <label for="">Домаќин</label>
+                                                <input type="number" name="CetvrtoPoluvremeHomeUpdate"
+                                                    id="CetvrtoPoluvremeHomeUpdate" class="form-control"
+                                                    placeholder="Четврто полувреме домаќин">
+                                                <div id="zadolzitelnoCetvrtoPoluvremeHomeUpdate" class="form-text">
+                                                    Можете да
+                                                    внесите
+                                                    максимално три
+                                                    броеви!!!</div>
+                                                <p id="maxCetvrtoHomeUpdate" class="alert alert-danger " role="alert">Ве
+                                                    молам
+                                                    внесете
+                                                    максимум три броеви !!! </p>
+                                            </div>
+                                            <div class="col-2 text-center">
+                                                <h1 class="mt-3">:</h1>
+                                            </div>
+                                            <div class="col-5">
+                                                <label for="">Гостин</label>
+                                                <input type="number" name="CetvrtoPoluvremeAwayUpdate"
+                                                    id="CetvrtoPoluvremeAwayUpdate" class="form-control"
+                                                    placeholder="Четврто полувреме гостин">
+                                                <div id="zadolzitelnoCetvrtoPoluvremeAwayUpdate" class="form-text">
+                                                    Можете да
+                                                    внесите
+                                                    максимално три
+                                                    броеви!!!</div>
+                                                <p id="maxCetvrtoAwayUpdate" class="alert alert-danger " role="alert">Ве
+                                                    молам
+                                                    внесете
+                                                    максимум три броеви !!! </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!---------------------------REZULTAT--------------------------------------->
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="editResults-">ИЗМЕНИ</button>
+                    <button type="button" class="btn btn-primary" id="closeModal"
+                        data-bs-dismiss="modal">ЗАТВОРИ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="flex-shrink-0 py-4 bg-dark text-white-50 ">
+        <div class="container text-center">
+            <small>Copyright &copy; Vladimir Krstevski</small>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krstevski</title>
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+
+    <!--JQuery-->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/leagues.js"></script>
+
+
+    <!--CSS-->
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+
+    <!--Icons link-->
+    <link rel="stylesheet" href="../assets/icons/fontawesome-free-6.1.2-web/css/all.css">
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid ">
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a id="teams" class="nav-link active" href="#">Teams</a>
+                </li>
+                <li class="nav-item">
+                    <a id="leagues" class="nav-link active" href="#">Leagues</a>
+                </li>
+                <li class="nav-item">
+                    <a id="moja" class="nav-link active" href="#">Moja</a>
+                </li>
+                <li class="nav-item">
+                    <a id="sport" class="nav-link active" href="#">Sport</a>
+                </li>
+                <li class="nav-item">
+                    <a id="premierLeague" class="nav-link active" href="#">Premier League</a>
+                </li>
+                <li class="nav-item">
+                    <a id="results" class="nav-link active" href="#">Results</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!---------------------------------LOGOUT---------------------------------------------------------------------->
+    <!-- The Modal Logout -->
+    <button id="logOutBtn" type="button" class="btn btn-warning" data-bs-toggle="modal"
+        data-bs-target="#logOutBootstrap">
+        <h4>Одлогирај се</h4>
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="logOutBootstrap" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h1 class="modal-title fs-5 " id="exampleModalLabel">Дали сакате навистина сакате да се одлогирате
+                        ???
+                    </h1>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary mb-5" id="logOut">Да</button>
+                    <button type="button" class="btn btn-primary mb-5" data-bs-dismiss="modal"
+                        aria-label="Close">Назад</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!---------------------------------INSERT---------------------------------------------------------------------->
+    <!-- Button trigger insert modal -->
+    <button id="addButton" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <h4>Додади</h4>
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="post" id="">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h1 class="modal-title fs-5 " id="exampleModalLabel">Додади</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="alertInfo" class="alert alert-info"> За да внесите правилно, променете го внесеното
+                            оригиналното име, но доколку сакате да го задржите морате да го промените регионот!!!
+                        </div>
+                        <label for="">original_name</label>
+                        <input type="text" name="originalName" id="originalName" class="form-control"
+                            placeholder="Внесете оригнално име">
+                        <div id="zadolzitelnoOrginalnoIme" class="form-text">*Задолжително внесете оригинално име!!!
+                        </div>
+                        <p id="minOriginaloIme" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално три карактери !!! </p>
+
+                        <br>
+
+                        <label for="">alternative_name</label>
+                        <input type="text" name="alternativeName" id="alternativeName" class="form-control"
+                            placeholder="Внесете алтернативно име">
+                        <br>
+
+                        <label for="">priority_default</label>
+                        <input type="number" name="priorityDefault" id="priorityDefault" class="form-control"
+                            placeholder="Внесете priority_default">
+                        <div id="zadolzitelnoPriorityDefault" class="form-text">*Задолжително priority_default!!!
+                        </div>
+                        <p id="dangerPriorityDefault" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+
+                        <br>
+                        <label for="">priority_custom</label>
+                        <input type="number" name="priorityCustom" id="priorityCustom" class="form-control"
+                            placeholder="Внесете priority_custom">
+                        <div id="zadolzitelnoPriorityCustom" class="form-text">*Задолжително priority_custom!!!
+                        </div>
+                        <p id="dangerPriorityCustom" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+                        <br>
+                        <label for="">template</label>
+                        <input type="number" name="template" id="template" class="form-control"
+                            placeholder="Внесете template">
+                        <div id="zadolzitelnoTemplate" class="form-text">*Задолжително template !!!
+                        </div>
+                        <p id="dangerTemplate" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+                        <br>
+                        <label for="">number_of_sets</label>
+                        <input type="number" name="numberOfSets" id="numberOfSets" class="form-control"
+                            placeholder="Внесете number_of_sets">
+                        <div id="zadolzitelnoNumberOfSets" class="form-text">*Задолжително number_of_sets !!!
+                        </div>
+                        <p id="dangerNumberOfSets" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+                        <br>
+
+                        <label for="">sport</label>
+                        <input type="number" name="addSport" id="addSport" class="form-control"
+                            placeholder="Внесете sport">
+                        <div id="zadolzitelnoSport" class="form-text">*Задолжително внесете спорт!!!
+                        </div>
+                        <p id="dangerSport" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+
+                        <br>
+                        <label for="">code_range</label>
+                        <input type="text" name="codeRange" id="codeRange" class="form-control"
+                            placeholder="Внесете code_range">
+                        <br>
+                        <label for="">subtitle</label>
+                        <input type="text" name="subtitle" id="subtitle" class="form-control"
+                            placeholder="Внесете subtitle">
+                        <br>
+
+                        <label for="">region_id</label>
+                        <input type="number" name="regionId" id="regionId" class="form-control"
+                            placeholder="Внесете region_id">
+                        <div id="zadolzitelnoRegionId" class="form-text">*Задолжително внесете регион ид!!!
+                        </div>
+                        <p id="dangerRegionId" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+
+                        <br>
+                        <label for="">zone_id</label>
+                        <input type="number" name="zoneId" id="zoneId" class="form-control"
+                            placeholder="Внесете оригнално zoneId">
+                        <div id="zadolzitelnoZoneId" class="form-text">*Задолжително внесете zone_id!!!
+                        </div>
+                        <p id="dangerZoneId" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+                        <br>
+                        <label for="">statistics_code</label>
+                        <input type="text" name="statisticsCode" id="statisticsCode" class="form-control"
+                            placeholder="Внесете statisticsCode">
+                        <br>
+                        <label for="">statistics_group</label>
+                        <input type="number" name="statisticsGroup" id="statisticsGroup" class="form-control"
+                            placeholder="Внесете statisticsGroup">
+                        <br>
+                        <label for="">statistics_name_new</label>
+                        <input type="text" name="statisticsNameNew" id="statisticsNameNew" class="form-control"
+                            placeholder="Внесете statisticsNameNew">
+                        <br>
+                        <label for="">percent</label>
+                        <input type="number" name="percent" id="percent" class="form-control"
+                            placeholder="Внесете percent">
+                        <div id="zadolzitelnoPercent" class="form-text">*Задолжително внесете percent!!!
+                        </div>
+                        <p id="dangerPercent" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+
+                        <br>
+                        <label for="">percent_ggng</label>
+                        <input type="number" name="3
+                        " id="percentGgng" class="form-control" placeholder="Внесете percent_ggng">
+                        <div id="zadolzitelnoPercentGgng" class="form-text">*Задолжително внесете percent_ggng!!!
+                        </div>
+                        <p id="dangerPercentGgng" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+                        <br>
+                        <label for="">odds_group</label>
+                        <input type="number" name="oddsGroup" id="oddsGroup" class="form-control"
+                            placeholder="Внесете odds_group">
+                        <div id="zadolzitelnoOddsGroup" class="form-text">*Задолжително внесете odds_group!!!
+                        </div>
+                        <p id="dangerOddsGroup" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+                        <br>
+                        <label for="">efID</label>
+                        <input type="number" name="efID" id="efID" class="form-control" placeholder="Внесете efID">
+                        <div id="zadolzitelnoEfId" class="form-text">*Задолжително внесете efID!!!
+                        </div>
+                        <p id="dangerEfId" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+
+                        <br>
+                        <label for="">apiFoot_id</label>
+                        <input type="number" name="apiFootId" id="apiFootId" class="form-control"
+                            placeholder="Внесете apiFoot_id">
+                        <div id="zadolzitelnoApi" class="form-text">*Задолжително внесете apiFoot_id!!!
+                        </div>
+                        <p id="dangerApi" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+
+                        <br>
+                        <label for="">results</label>
+                        <input type="number" name="resultsAdd" id="resultsAdd" class="form-control"
+                            placeholder="Внесете резултати">
+                        <div id="zadolzitelnoResults" class="form-text">*Задолжително внесете results!!!
+                        </div>
+                        <p id="dangerResults" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+
+                        <br>
+                        <label for="">extra_type_template_id</label>
+                        <input type="number" name="extraTypeTemplateId" id="extraTypeTemplateId" class="form-control"
+                            placeholder="Внесете extraTypeTemplateId">
+                        <div id="zadolzitelnoExtra" class="form-text">*Задолжително внесете extra_type_template_id!!!
+                        </div>
+                        <p id="dangerExtra" class="alert alert-danger " role="alert">Ве молам внесете
+                            минимално една цифра !!! </p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary mb-5" id="save">Зачувај</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-----------------------------------------SEARCH----------------------------------------------->
+    <br><br>
+    <input id="myInput" class="form-control" type="text" placeholder="Пребарајте тука..">
+    <br><br>
+    <!-----------------------------------------TABLE----------------------------------------------->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped text-center" id="myTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                id
+                            </th>
+                            <th>
+                                original_name
+                            </th>
+                            <th>
+                                alternative_name
+                            </th>
+                            <th>
+                                priority_default
+                            </th>
+                            <th>
+                                priority_custom
+                            </th>
+                            <th>
+                                template
+                            </th>
+                            <th>
+                                number_of_sets
+                            </th>
+                            <th>
+                                sport
+                            </th>
+                            <th>
+                                code_range
+                            </th>
+                            <th>
+                                subtitle
+                            </th>
+                            <th>
+                                region_id
+                            </th>
+                            <th>
+                                zone_id
+                            </th>
+                            <th>
+                                statistics_code
+                            </th>
+                            <th>
+                                statistics_group
+                            </th>
+                            <th>
+                                statistics_name_new
+                            </th>
+                            <th>
+                                percent
+                            </th>
+                            <th>
+                                percent_ggng
+                            </th>
+                            <th>
+                                odds_group
+                            </th>
+                            <th>
+                                efID
+                            </th>
+                            <th>
+                                apiFoot_id
+                            </th>
+                            <th>
+                                results
+                            </th>
+                            <th>
+                                extra_type_template_id
+                            </th>
+                            <th>
+                                Избриши
+                            </th>
+                            <th>
+                                Промени
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------------DELETE------------------------------------------------------------------------------------>
+    <!-- The Modal Delete -->
+    <div class="modal" id="deleteModal-">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header bg-danger text-white">
+                    <h4 class="modal-title">Избриши</h4>
+                    <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Дали сакате да избришите <a id="naslovDeleteOriginalIme"></a> со ид:<a id="naslovDeleteId"></a> ???
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="deleteLeagues-"
+                        data-bs-dismiss="modal">ИЗБРИШИ</button>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">ЗАТВОРИ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------------UPDATE------------------------------------------------------------------------------------>
+    <!-- The Modal Update -->
+    <div class="modal" id="editModal-">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Дали сакате се промени <a id="naslovOriginalIme"></a> ???</h5>
+                    <button type="button" class="btn-close " data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form name="myForm">
+                        <div class="row">
+                            <div class="col-sm-12 bg-light">
+                                <div id="alertInfoUpdate" class="alert alert-info"> За да внесите правилно, променете го
+                                    внесеното
+                                    оригиналното име, но доколку сакате да го задржите морате да го промените
+                                    регионот!!!
+                                </div>
+                                <div class="mb-3">
+                                    <label for="originalNameInput" class="form-label">original_name:</label>
+                                    <input type="text" class="form-control" id="originalNameInput"
+                                        placeholder="Внесете original_name" name="originalNameInput">
+                                    <div id="zadolzitelnoOrginalnoImeUpdate" class="form-text">*Задолжително внесете
+                                        оригинално име!!!
+                                    </div>
+                                    <p id="minOriginaloImeUpdate" class="alert alert-danger " role="alert">Ве молам
+                                        внесете
+                                        минимално три карактери !!! </p>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="alternativeNameInput" class="form-label">alternative_name:</label>
+                                    <input type="text" class="form-control" id="alternativeNameInput"
+                                        placeholder="Внесете alternative_name" name="alternativeNameInput">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="priorityDefaultInput" class="form-label">priority_default:</label>
+                                    <input type="number" class="form-control" id="priorityDefaultInput"
+                                        placeholder="Внесете priorityDefaultInput" name="priorityDefaultInput">
+                                    <div id="zadolzitelnoPriorityDefaultUpdate" class="form-text">*Задолжително
+                                        priority_default!!!
+                                    </div>
+                                    <p id="dangerPriorityDefaultUpdate" class="alert alert-danger " role="alert">Ве
+                                        молам
+                                        внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="priorityCustomInput" class="form-label">priority_custom:</label>
+                                    <input type="number" class="form-control" id="priorityCustomInput"
+                                        placeholder="Внесете priorityCustomInput" name="priorityCustomInput">
+                                    <div id="zadolzitelnoPriorityCustomUpdate" class="form-text">*Задолжително
+                                        priority_custom!!!
+                                    </div>
+                                    <p id="dangerPriorityCustomUpdate" class="alert alert-danger " role="alert">Ве молам
+                                        внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="templateUpdate" class="form-label">template:</label>
+                                    <input type="number" class="form-control" id="templateUpdate"
+                                        placeholder="Внесете templateUpdate" name="templateUpdate">
+                                    <div id="zadolzitelnoTemplateUpdate" class="form-text">*Задолжително template !!!
+                                    </div>
+                                    <p id="dangerTemplateUpdate" class="alert alert-danger " role="alert">Ве молам
+                                        внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="numberOfSetsInput" class="form-label">number_of_sets:</label>
+                                    <input type="number" class="form-control" id="numberOfSetsInput"
+                                        placeholder="Внесете numberOfSetsInput" name="numberOfSetsInput">
+                                    <div id="zadolzitelnoNumberOfSetsUpdate" class="form-text">*Задолжително
+                                        number_of_sets
+                                        !!!
+                                    </div>
+                                    <p id="dangerNumberOfSetsUpdate" class="alert alert-danger " role="alert">Ве молам
+                                        внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="sportInput" class="form-label">sport:</label>
+                                    <input type="number" class="form-control" id="sportInput"
+                                        placeholder="Внесете sportInput" name="sportInput">
+                                    <div id="zadolzitelnoSportUpdate" class="form-text">*Задолжително внесете спорт!!!
+                                    </div>
+                                    <p id="dangerSportUpdate" class="alert alert-danger " role="alert">Ве молам внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="codeRangeInput" class="form-label">code_range:</label>
+                                    <input type="text" class="form-control" id="codeRangeInput"
+                                        placeholder="Внесете codeRangeInput" name="codeRangeInput">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subtitleInput" class="form-label">subtitle:</label>
+                                    <input type="text" class="form-control" id="subtitleInput"
+                                        placeholder="Внесете subtitleInput" name="subtitleInput">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="regionIdInput" class="form-label">region_id:</label>
+                                    <input type="number" class="form-control" id="regionIdInput"
+                                        placeholder="Внесете regionIdInput" name="regionIdInput">
+                                    <div id="zadolzitelnoRegionIdUpdate" class="form-text">*Задолжително внесете регион
+                                        ид!!!
+                                    </div>
+                                    <p id="dangerRegionIdUpdate" class="alert alert-danger " role="alert">Ве молам
+                                        внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="zoneIdInput" class="form-label">zone_id:</label>
+                                    <input type="number" class="form-control" id="zoneIdInput"
+                                        placeholder="Внесете zoneIdInput" name="zoneIdInput">
+                                    <div id="zadolzitelnoZoneIdUpdate" class="form-text">*Задолжително внесете
+                                        zone_id!!!
+                                    </div>
+                                    <p id="dangerZoneIdUpdate" class="alert alert-danger " role="alert">Ве молам внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="statisticsCodeInput" class="form-label">statistics_code:</label>
+                                    <input type="text" class="form-control" id="statisticsCodeInput"
+                                        placeholder="Внесете statisticsCodeInput" name="statisticsCodeInput">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="statisticsGroupInput" class="form-label">statistics_group:</label>
+                                    <input type="text" class="form-control" id="statisticsGroupInput"
+                                        placeholder="Внесете statisticsGroupInput" name="statisticsGroupInput">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="statisticsNameNewInput" class="form-label">statistics_name_new:</label>
+                                    <input type="text" class="form-control" id="statisticsNameNewInput"
+                                        placeholder="Внесете statisticsNameNewInput" name="statisticsNameNewInput">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="percentInput" class="form-label">percent:</label>
+                                    <input type="text" class="form-control" id="percentInput"
+                                        placeholder="Внесете percentInput" name="percentInput">
+                                    <div id="zadolzitelnoPercentUpdate" class="form-text">*Задолжително внесете
+                                        percent!!!
+                                    </div>
+                                    <p id="dangerPercentUpdate" class="alert alert-danger " role="alert">Ве молам
+                                        внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="percenGgngInput" class="form-label">percent_ggng:</label>
+                                    <input type="text" class="form-control" id="percenGgngInput"
+                                        placeholder="Внесете percenGgngInput" name="percenGgngInput">
+                                    <div id="zadolzitelnoPercentGgngUpdate" class="form-text">*Задолжително внесете
+                                        percent_ggng!!!
+                                    </div>
+                                    <p id="dangerPercentGgngUpdate" class="alert alert-danger " role="alert">Ве молам
+                                        внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="oddsGroupInput" class="form-label">odds_group:</label>
+                                    <input type="number" class="form-control" id="oddsGroupInput"
+                                        placeholder="Внесете oddsGroupInput" name="oddsGroupInput">
+                                    <div id="zadolzitelnoOddsGroupUpdate" class="form-text">*Задолжително внесете
+                                        odds_group!!!
+                                    </div>
+                                    <p id="dangerOddsGroupUpdate" class="alert alert-danger " role="alert">Ве молам
+                                        внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="efIDInput" class="form-label">efID:</label>
+                                    <input type="number" class="form-control" id="efIDInput"
+                                        placeholder="Внесете efIDInput" name="efIDInput">
+                                    <div id="zadolzitelnoEfIdUpdate" class="form-text">*Задолжително внесете efID!!!
+                                    </div>
+                                    <p id="dangerEfIdUpdate" class="alert alert-danger " role="alert">Ве молам внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apiFootIdInput" class="form-label">apiFoot_id:</label>
+                                    <input type="number" class="form-control" id="apiFootIdInput"
+                                        placeholder="Внесете apiFootIdInput" name="apiFootIdInput">
+                                    <div id="zadolzitelnoApiUpdate" class="form-text">*Задолжително внесете
+                                        apiFoot_id!!!
+                                    </div>
+                                    <p id="dangerApiUpdate" class="alert alert-danger " role="alert">Ве молам внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="resultsInput" class="form-label">results:</label>
+                                    <input type="number" class="form-control" id="resultsInput"
+                                        placeholder="Внесете results" name="resultsInput">
+                                    <div id="zadolzitelnoResultsUpdate" class="form-text">*Задолжително внесете
+                                        results!!!
+                                    </div>
+                                    <p id="dangerResultsUpdate" class="alert alert-danger " role="alert">Ве молам
+                                        внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="extraTypeTemplateIdInput"
+                                        class="form-label">extra_type_template_id:</label>
+                                    <input type="number" class="form-control" id="extraTypeTemplateIdInput"
+                                        placeholder="Внесете extraTypeTemplateIdInput" name="extraTypeTemplateIdInput">
+                                    <div id="zadolzitelnoExtraUpdate" class="form-text">*Задолжително внесете
+                                        extra_type_template_id!!!
+                                    </div>
+                                    <p id="dangerExtraUpdate" class="alert alert-danger " role="alert">Ве молам внесете
+                                        минимално една цифра !!! </p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="editLeagues-">ИЗМЕНИ</button>
+                    <button type="button" class="btn btn-primary" id="closeModal"
+                        data-bs-dismiss="modal">ЗАТВОРИ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="flex-shrink-0 py-4 bg-dark text-white-50 ">
+        <div class="container text-center">
+            <small>Copyright &copy; Vladimir Krstevski</small>
+        </div>
+    </footer>
+</body>
+
+</html>
